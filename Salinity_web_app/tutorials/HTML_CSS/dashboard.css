@@ -1,0 +1,274 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#Be {
+    border: solid 2px;
+    padding: 5px;
+    color: white;
+    background-color: red;
+    border-radius: 7px;
+}
+
+#cm {
+    border: solid 2px;
+    padding: 5px;
+    color: white;
+    background-color: blue;
+    border-radius: 7px;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+h3 {
+    font-size: 10px;
+}
+
+.sitemap-container {
+    flex: 1;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+    background-image: url("../images/site_pic_03.png");
+    background-position: 50% 5px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+}
+
+#sitemap {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+
+}
+
+.CR1 {
+    border: 0px solid #ddd;
+    padding: 4px;
+    text-align: center;
+    width: 80px;
+    position: absolute;
+    top: 225px;
+    left: 575px;
+    font-size: 10px;
+}
+
+.CR2, .CR3, .CR4, .CR5,
+.CR6, .CR7, .CR8, .CR9,
+.CR10, .CR11, .CR12, .CR13,
+.CR14, .CR15, .CR16, .CR17,
+.CR18, .CR19, .CR20, .CR21,
+.CR22, .CR23, .CR24, .CR25,
+.CR26, .CR27, .CR28, .CR29,
+.CR30, .CR31, .CR32{
+    border: 0px solid #ddd;
+    padding: 4px;
+    text-align: center;
+    width: 80px;
+    position: absolute;
+    font-size: 10px;
+}
+
+.CR2 {
+    top: 175px;
+    left: 600px;   
+}
+
+.CR3 {
+    top: 135px;
+    left: 620px;
+}
+
+.CR4 {
+    top: 95px;
+    left: 630px;
+}
+
+.CR5 {
+    top: 95px;
+    left: 575px;
+}
+
+.CR6 {
+    top: 140px;
+    left: 560px;
+}
+
+.CR7 {
+    top: 180px;
+    left: 540px;
+}
+
+.CR8 {
+    top: 230px;
+    left: 530px;
+}
+
+.CR9 {
+    top: 235px;
+    left: 475px;
+}
+
+.CR10 {
+    top: 188px;
+    left: 490px;
+}
+
+.CR11 {
+    top: 141px;
+    left: 505px;
+}
+
+.CR12 {
+    top: 95px;
+    left: 520px;
+}
+
+.CR13 {
+    top: 98px;
+    left: 468px;
+}
+
+.CR14 {
+    top: 145px;
+    left: 450px;
+}
+
+.CR15 {
+    top: 193px;
+    left: 435px;
+}
+
+.CR16 {
+    top: 240px;
+    left: 422px;
+}
+
+.CR17 {
+    top: 245px;
+    left: 369px;
+}
+
+.CR18 {
+    top: 198px;
+    left: 383px;
+}
+
+.CR19 {
+    top: 148px;
+    left: 395px;
+}
+
+.CR20 {
+    top: 101px;
+    left: 410px;
+}
+
+.CR21 {
+    top: 101px;
+    left: 360px;
+}
+
+.CR22 {
+    top: 151px;
+    left: 345px;
+}
+
+.CR23 {
+    top: 200px;
+    left: 330px;
+}
+
+.CR24 {
+    top: 249px;
+    left: 315px;
+}
+
+.CR25 {
+    top: 257px;
+    left: 255px;
+}
+
+.CR26 {
+    top: 206px;
+    left: 269px;
+}
+
+.CR27 {
+    top: 155px;
+    left: 285px;
+}
+
+.CR28 {
+    top: 105px;
+    left: 300px;
+}
+
+.CR29 {
+    top: 105px;
+    left: 227px;
+}
+
+.CR30 {
+    top: 158px;
+    left: 215px;
+}
+
+.CR31 {
+    top: 212px;
+    left: 200px;
+}
+
+.CR32 {
+    top: 263px;
+    left: 185px;
+}
+#salinity-pan-1{
+    background-color: red;
+    color: white;
+    border-radius: 1px;
+}
+
+#brine-pan-1 {
+    background-color: blue;
+    color: white; 
+    border-radius: 1px; 
+}
+.data-table-container {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+}

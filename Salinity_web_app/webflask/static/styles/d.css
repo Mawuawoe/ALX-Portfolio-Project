@@ -1,0 +1,383 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    background-color: #f4f4f4;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.map-container {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 100%; /* The container scales with the image */
+    display: inline-block;
+}
+
+/* Make the image responsive */
+.site-map-image {
+    width: 100%;
+    height: auto; /* Image scales based on its container */
+  }
+
+.key {
+    position: absolute;
+    top: 93%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+}
+#Be {
+    border: solid 2px;
+    padding: 5px;
+    color: white;
+    background-color: red;
+    border-radius: 7px;
+    font-size: 1vw;
+}
+
+#cm {
+    border: solid 2px;
+    padding: 5px;
+    color: white;
+    background-color: blue;
+    border-radius: 7px;
+    font-size: 1vw;
+}
+
+
+.lable {
+    border: 0px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    width: 5vw;
+    position: absolute;
+    font-size: 1vw;
+    transform: translate(-50%, -50%);
+}
+
+.salinity {
+    background-color: red;
+    color: white;
+    border-radius: 1px;
+    font-size: 1vw;
+}
+
+.brine-level {
+    background-color: blue;
+    color: white; 
+    border-radius: 1px;
+    font-size: 1vw;
+}
+
+#Pan1{
+    top: 56%;
+    left: 84%; 
+}
+
+#Pan2{
+    top: 40%;
+    left: 87.5%; 
+}
+
+#Pan3{
+    top: 25%;
+    left: 90.5%; 
+}
+
+#Pan4{
+    top: 11%;
+    left: 92.5%; 
+}
+
+#Pan5{
+    top: 11%;
+    left: 83.5%; 
+}
+
+#Pan6{
+    top: 26%;
+    left: 81%; 
+}
+
+#Pan7{
+    top: 41%;
+    left: 79%; 
+}
+
+
+#Pan8{
+    top: 58%;
+    left: 76.2%; 
+}
+
+#Pan9{
+    top: 60%;
+    left: 67.5%; 
+}
+
+#Pan10{
+    top: 43%;
+    left: 70%; 
+}
+
+#Pan11{
+    top: 27%;
+    left: 72.5%; 
+}
+
+#Pan12{
+    top: 11.5%;
+    left: 74.9%; 
+}
+
+#Pan13{
+    top: 11.5%;
+    left: 66.2%; 
+}
+
+#Pan14{
+    top: 28.5%;
+    left: 63.8%; 
+}
+
+#Pan15{
+    top: 44.5%;
+    left: 61.5%; 
+}
+
+#Pan16{
+    top: 61.5%;
+    left: 59%; 
+}
+
+#Pan17{
+    top: 64%;
+    left: 50%; 
+}
+
+#Pan18{
+    top: 46%;
+    left: 53%; 
+}
+
+#Pan19{
+    top: 29%;
+    left: 55%; 
+}
+
+#Pan20{
+    top: 13%;
+    left: 57.5%; 
+}
+
+#Pan21{
+    top: 13%;
+    left: 49%; 
+}
+
+#Pan22{
+    top: 30.5%;
+    left: 46.5%; 
+}
+
+#Pan23{
+    top: 48.5%;
+    left: 44%; 
+}
+
+#Pan24{
+    top: 65.5%;
+    left: 41.7%; 
+}
+
+#Pan25{
+    top: 67.5%;
+    left: 31.5%; 
+}
+
+#Pan26{
+    top: 49.9%;
+    left: 33.5%; 
+}
+
+#Pan26{
+    top: 49.9%;
+    left: 33.5%; 
+}
+
+#Pan27{
+    top: 31.7%;
+    left: 36.5%; 
+}
+
+#Pan28{
+    top: 14%;
+    left: 39%; 
+}
+
+#Pan29{
+    top: 15%;
+    left: 27.5%; 
+}
+
+#Pan30{
+    top: 32.5%;
+    left: 25.5%; 
+}
+
+#Pan31{
+    top: 52%;
+    left: 22.5%; 
+}
+
+#Pan32{
+    top: 70%;
+    left: 20.5%; 
+}
+
+#R1{
+    top: 75%;
+    left: 80%; 
+}
+
+#R2{
+    top: 75%;
+    left: 67%; 
+}
+
+#R3{
+    top: 77.5%;
+    left: 57%; 
+}
+
+#R4{
+    top: 79.5%;
+    left: 48.5%; 
+}
+
+#R5{
+    top: 84.5%;
+    left: 23%; 
+}
+
+#PCRA{
+    top: 33.5%;
+    left: 12.5%; 
+}
+
+#PCRB{
+    top: 62%;
+    left: 11.5%; 
+}
+
+/* Style for the filter form container */
+form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #739eba;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the label */
+form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style for the select dropdown */
+form select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+/* Change border color when hovering on the select */
+form select:hover {
+    border-color: #eb32a7;
+}
+
+/* Style for the entire form on small screens */
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    form label {
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    background-color: #f4f4f4;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.map-container {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 100%; /* The container scales with the image */
+    display: inline-block;
+}
+
+/* Make the image responsive */
+.site-map-image {
+    width: 100%;
+    height: auto; /* Image scales based on its container */
+  }
+
+.key {
+    position: absolute;
+    top: 93%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+}
+#Be {
+    border: solid 2px;
+    padding: 5px;
+    color: white;
+    background-color: red;
+    border-radius: 7px;
+    font-size: 1vw;
+}
+
+#cm {
+    border: solid 2px;
+    padding: 5px;
+    color: white;
+    background-color: blue;
+    border-radius: 7px;
+    font-size: 1vw;
+}
+
+
+.lable {
+    border: 0px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    width: 5vw;
+    position: absolute;
+    font-size: 1vw;
+    transform: translate(-50%, -50%);
+}
+
+.salinity {
+    background-color: red;
+    color: white;
+    border-radius: 1px;
+    font-size: 1vw;
+}
+
+.brine-level {
+    background-color: blue;
+    color: white; 
+    border-radius: 1px;
+    font-size: 1vw;
+}
+
+#CR1{
+    top: 56%;
+    left: 84%; 
+}
+
+#CR2{
+    top: 40%;
+    left: 87.5%; 
+}
+
+#CR3{
+    top: 25%;
+    left: 90.5%; 
+}
+
+#CR4{
+    top: 11%;
+    left: 92.5%; 
+}
+
+#CR5{
+    top: 11%;
+    left: 83.5%; 
+}
+
+#CR6{
+    top: 26%;
+    left: 81%; 
+}
+
+#CR7{
+    top: 41%;
+    left: 79%; 
+}
+
+#CR7{
+    top: 41%;
+    left: 79%; 
+}
+
+#CR8{
+    top: 58%;
+    left: 76.2%; 
+}
+
+#CR9{
+    top: 60%;
+    left: 67.5%; 
+}
+
+#CR10{
+    top: 43%;
+    left: 70%; 
+}
+
+#CR11{
+    top: 27%;
+    left: 72.5%; 
+}
+
+#CR12{
+    top: 11.5%;
+    left: 74.9%; 
+}
+
+#CR13{
+    top: 11.5%;
+    left: 66.2%; 
+}
+
+#CR14{
+    top: 28.5%;
+    left: 63.8%; 
+}
+
+#CR15{
+    top: 44.5%;
+    left: 61.5%; 
+}
+
+#CR16{
+    top: 61.5%;
+    left: 59%; 
+}
+
+#CR17{
+    top: 64%;
+    left: 50%; 
+}
+
+#CR18{
+    top: 46%;
+    left: 53%; 
+}
+
+#CR19{
+    top: 29%;
+    left: 55%; 
+}
+
+#CR20{
+    top: 13%;
+    left: 57.5%; 
+}
+
+#CR21{
+    top: 13%;
+    left: 49%; 
+}
+
+#CR22{
+    top: 30.5%;
+    left: 46.5%; 
+}
+
+#CR23{
+    top: 48.5%;
+    left: 44%; 
+}
+
+#CR24{
+    top: 65.5%;
+    left: 41.7%; 
+}
+
+#CR25{
+    top: 67.5%;
+    left: 31.5%; 
+}
+
+#CR26{
+    top: 49.9%;
+    left: 33.5%; 
+}
+
+#CR26{
+    top: 49.9%;
+    left: 33.5%; 
+}
+
+#CR27{
+    top: 31.7%;
+    left: 36.5%; 
+}
+
+#CR28{
+    top: 14%;
+    left: 39%; 
+}
+
+#CR29{
+    top: 15%;
+    left: 27.5%; 
+}
+
+#CR30{
+    top: 32.5%;
+    left: 25.5%; 
+}
+
+#CR31{
+    top: 52%;
+    left: 22.5%; 
+}
+
+#CR32{
+    top: 70%;
+    left: 20.5%; 
+}
+
+#R1{
+    top: 75%;
+    left: 80%; 
+}
+
+#R2{
+    top: 75%;
+    left: 67%; 
+}
+
+#R3{
+    top: 77.5%;
+    left: 57%; 
+}
+
+#R4{
+    top: 79.5%;
+    left: 48.5%; 
+}
+
+#R5{
+    top: 84.5%;
+    left: 23%; 
+}
+
+#PCRA{
+    top: 33.5%;
+    left: 12.5%; 
+}
+
+#PCRB{
+    top: 62%;
+    left: 11.5%; 
+}

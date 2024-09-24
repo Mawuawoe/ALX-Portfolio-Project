@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Salinity Data</title>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="../static/styles/data_entry.css">
+</head>
+<body>
+    <div class="form-container">
+			<h1>Update Record</h1>
+
+        <!-- Flash Message Display Section -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form id="salinityForm" action="/{{ url_for('update', pan_id=record.id) }}" method="POST">
+			<!-- Default action to add a record -->
+            <!-- Select Pan Type (Pan, Reservoir, PCR) -->
+            <label for="pan_type">Pan Type:</label>
+			<input type="text" id="pan_type" name="pan_type" value="{{ record.pan.pan_type}}">
+
+            <!-- Select Specific Pan based on Pan Type -->
+            <label for="pan">Select Pan:</label>
+			<input type="text" id="pan" name="pan" value="{{ record.pan.pan_id }}">
+
+            <!-- Input Salinity Level -->
+            <label for="salinity">Salinity Level (Be):</label>
+            <input type="number" id="salinity" name="salinity" step="1" required value="{{ record.salinity_level }}">
+
+            <!-- Input Brine Level -->
+            <label for="brine">Brine Level (cm):</label>
+            <input type="number" id="brine" name="brine" step="1" required value="{{ record.brine_level }}">
+
+            <!-- Buttons for Add, Update, and Delete -->
+            <input type="submit" id="updateButton" value="Update Record" formaction="{{ url_for('update', pan_id=record.id) }}">
+        </form>
+        <a href="{{ url_for('report_page') }}">Back to Report</a>
+    </div>
+
+    <!-- Link to External jQuery Script -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Link to Custom Script -->
+	<script src="../static/scripts/data_entry.js"></script>
+</body>
+</html>

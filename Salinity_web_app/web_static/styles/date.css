@@ -1,0 +1,38 @@
+/* Styles for the date filter */
+.date-filter-container {
+	border: 1px solid #ccc;
+	padding: 10px;
+	background-color: #f9f9f9;
+	border-radius: 8px;
+	font-size: 14px;
+	height: 45px;
+	margin: 0;
+}
+
+.date-filter-container h3 {
+	margin-bottom: 5px;
+	margin-top: 1px;
+}
+
+.date-filter-container label {
+	margin-bottom: 5px;
+}
+
+.date-filter-container input[type="date"] {
+	margin-bottom: 5px;
+}
+
+.date-filter-container button {
+	
+	padding: 5px;
+	background-color: #007BFF;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.date-filter-container button:hover {
+	background-color: #0056b3;
+}
+

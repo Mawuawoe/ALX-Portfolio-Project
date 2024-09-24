@@ -1,0 +1,56 @@
+.table {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100%; /* The container scales with the image */
+    max-height: 100%;
+    display: inline-block;
+    margin-top: 10px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+/* Flash messages styling */
+.flashes {
+    list-style-type: none; /* Remove bullet points */
+    margin-top: 20px; /* Space above messages */
+}
+
+.flashes li {
+    margin-bottom: 10px; /* Space between messages */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners */
+}
+
+.flashes .success {
+    background-color: #dff0d8; /* Light green background for success messages */
+    color: #3c763d; /* Dark green text color */
+}
+
+.flashes .danger {
+    background-color: #f2dede; /* Light red background for error messages */
+    color: #a94442; /* Dark red text color */
+}
+
+.flashes .info {
+    background-color: #d1ecf1; /* Light blue */
+    color: #0c5460; /* Dark blue */
+    border: 1px solid #bee5eb; /* Border color */
+}

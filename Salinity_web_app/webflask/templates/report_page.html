@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Filter Data</title>
+	<!-- Link to External CSS -->
+	<link rel="stylesheet" href="../static/styles/report.css">
+</head>
+<body>
+	<div class="container">
+		<a href="{{ url_for('dashboard') }}"><< Back to Dashboard</a>
+		<h1>Filter and Manage Data</h1>
+
+		<!-- Filter Form -->
+		<form id="filterForm" method="POST" action="/report_page">
+			<!-- Date Filter (Left aligned) -->
+			<div class="form-group">
+				<label for="date">Select Date(s):</label>
+				<input type="date" id="date" name="date" value="{{ selected_date }}" required>
+			</div>
+
+			<!-- Further Filter: Pan, Reservoir, PCR -->
+			<div class="form-group">
+				<label for="filterType">Filter by:</label>
+				<select id="filterType" name="filterType" >
+					<option value=""></option>
+					<option value="pan" {% if selected_filter == "pan" %}selected{% endif %}>Pan</option>
+					<option value="reservoir" {% if selected_filter == "reservoir" %}selected{% endif %}>Reservoir</option>
+					<option value="pcr" {% if selected_filter == "pcr" %}selected{% endif %}>PCR</option>
+				</select>
+			</div>
+
+			<!-- Action buttons: Apply Filters -->
+			<div class="action-buttons">
+				<button class="btn" type="submit">Generate Report</button>
+			</div>
+		</form>
+
+		<!-- Data Table with Update, Delete, and Download buttons for each row -->
+		<div class="mt-4">
+			<h3>Filtered Data</h3>
+
+		<!-- Form for Update and Delete actions -->
+		<form id="dataTableForm" method="POST" action="/handle_selection">
+		    <!-- Include hidden inputs to retain the filter state -->
+			<input type="hidden" name="selected_date" value="{{ selected_date }}">
+			<input type="hidden" name="selected_filter" value="{{ selected_filter }}">
+
+			<!-- Buttons to trigger update or delete actions -->
+			<div class="action-buttons">
+				<!-- button class="btn btn-warning" name="action" value="update" type="submit">Update Selected</button -->
+				<button class="btn btn-danger" name="action" value="delete" type="submit">Delete Selected</button>
+				<!-- Download CSV or Excel button -->
+				<button class="btn btn-success" formaction="/download_csv" type="submit">Download CSV</button>
+				<!-- button class="btn btn-primary" formaction="/download_excel" type="submit">Download Excel</button -->
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Select</th>
+						<th>Pan ID</th>
+						<th>Date</th>
+						<th>Salinity Level</th>
+						<th>Brine level</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Table data will be populated dynamically -->
+					{% for pan_id, records in salinity_records.items() %}
+					{% for record in records %}
+						<tr>
+							<td><input type="checkbox" name="selected_pan_ids" value="{{ record.id }}"></td>
+							<td>{{ pan_id }}</td>
+							{% if record.__class__.__name__ == "Salinity" %}
+								<td>{{ record.updated_at }}</td>
+								<td>{{ record.salinity_level }}</td>
+								<td>{{ record.brine_level }}</td>
+							{% else %}
+								<td>NA</td>
+								<td>{{ record['salinity_level'] }}</td>
+								<td>{{ record['brine_level'] }}</td>
+							{% endif %}
+						</tr>
+					{% endfor %}
+				{% endfor %}
+				</tbody>
+			</table>
+		</form>
+		</div>
+	</div>
+</body>
+</html>

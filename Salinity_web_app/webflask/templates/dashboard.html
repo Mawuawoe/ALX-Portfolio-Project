@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="../static/styles/d.css">
+	<link rel="stylesheet" href="../static/styles/data_entry.css">
+	<link rel="stylesheet" href="../static/styles/table.css">
+</head>
+<body>
+	<div class="container">
+		<!-- Sidebar navigation -->
+		<nav class="sidebar">
+			<h2>Dashboard</h2>
+				<ul>
+					<li><a href="/dashboard">Home</a></li>
+					<li><a href="/data_entry">Data Entry</a></li>
+					<li><a href="/report_page">Reports</a></li>
+					{% if is_admin %}
+						<li><a href="/create_user">Create User</a></li>
+					{% endif %}
+					<li><a href="/logout">Logout</a></li>
+				</ul>
+		</nav>
+
+		<!-- Main content area -->
+		<div class="main-content">
+			<header>
+        <h1>Welcome to the Dashboard</h1>
+        <form action="{{ url_for('dashboard') }}" method="GET">
+            <div class="date-filter-container">
+                <label for="dateFilter">Select Date:</label>
+                <input type="date" id="dateFilter" name="date" value="{{ selected_date }}" required>
+				<!-- Add hidden input to preserve the selected filter -->
+				<input type="hidden" name="filter" value="{{ selected_filter }}">
+                <button type="submit">Filter</button>
+            </div>
+        </form>
+    </header>
+
+			<section class="map-container">
+				<img src="../static/images/site_pic_03.png" alt="Brine Pans Site Map" class="site-map-image">
+				{% for pan_id, record in today_records.items() %}
+					<div class="lable" id="{{ pan_id }}">
+						<h3>{{ pan_id }}</h3>
+							<p class="salinity">
+							{% if record.__class__.__name__ == "Salinity" %}
+								{{ record.salinity_level }} Be
+							{% else %}
+								{{ record['salinity_level'] }} Be
+							{% endif %}
+							</p>
+							<p class="brine-level">
+							{% if record.__class__.__name__ == "Salinity" %}
+								{{ record.brine_level }} cm
+							{% else %}
+								{{ record['brine_level'] }} cm
+							{% endif %}
+							</p>
+					</div>
+				{% endfor %}
+					
+				<!-- Add more BrinePans here -->
+				<div class="key">
+					<p ><pre><span id="Be">Salinity Be</span>   <span id="cm">Brine Level cm</span></pre></p>
+				</div>		
+			</section>
+			<section class="table">
+				<!-- Filter Form -->
+				<form method="GET" action="{{ url_for('dashboard') }}">
+					<label for="filter">Filter By:</label>
+					<select name="filter" id="filter" onchange="this.form.submit()">
+						<option value="">-- All --</option>
+						<option value="pan" {% if selected_filter == 'pan' %}selected{% endif %}>Pans</option>
+						<option value="reservoir" {% if selected_filter == 'reservoir' %}selected{% endif %}>Reservoirs</option>
+						<option value="pcr" {% if selected_filter == 'pcr' %}selected{% endif %}>PCRs</option>
+					</select>
+					  <!-- Add a hidden input to keep the selected date when filtering -->
+   				 <input type="hidden" name="date" value="{{ selected_date }}">
+				</form>
+				<table>
+					<thead>
+						<tr>
+							<th>BrinePan</th>
+							<th>Salinity Level</th>
+							<th>Brine Level</th>
+							<th>Timestamp</th>
+							<th>Brine Attendant</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Table data will be populated dynamically -->
+						{% for pan_id, record in latest_salinity_records.items() %}
+						<tr>
+							<td>{{ pan_id }}</td>
+							{% if record.__class__.__name__ == "Salinity" %}
+								<td>{{ record.salinity_level }}</td>
+								<td>{{ record.brine_level }}</td>
+								<td>{{ record.updated_at }}</td>
+								<td>{{ record.user.username }}</td>
+							{% else %}
+								<td>{{ record['salinity_level'] }}</td>
+								<td>{{ record['brine_level'] }}</td>
+								<td>NA</td>
+								<td>NA</td>
+							{% endif %}
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+</body>
+</html>

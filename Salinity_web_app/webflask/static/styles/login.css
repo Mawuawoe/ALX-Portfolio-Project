@@ -1,0 +1,110 @@
+/* Basic reset for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling for the login container */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 100px auto; /* Center the container */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+
+/* Title for the login form */
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333; /* Dark text for contrast */
+}
+
+/* Input group styling */
+.input-group {
+    margin-bottom: 20px; /* Space between inputs */
+}
+
+/* Form labels */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555; /* Slightly lighter text */
+}
+
+/* Form input fields */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px; /* Slightly larger padding */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Readable font size */
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Submit button hover effect */
+button[type="submit"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+/* Flash messages styling */
+.flashes {
+    list-style-type: none; /* Remove bullet points */
+    margin-top: 20px; /* Space above messages */
+}
+
+.flashes li {
+    margin-bottom: 10px; /* Space between messages */
+    padding: 10px;
+    border-radius: 4px; /* Rounded corners */
+}
+
+.flashes .success {
+    background-color: #dff0d8; /* Light green background for success messages */
+    color: #3c763d; /* Dark green text color */
+}
+
+.flashes .danger {
+    background-color: #f2dede; /* Light red background for error messages */
+    color: #a94442; /* Dark red text color */
+}
+
+.flashes .info {
+    background-color: #d1ecf1; /* Light blue */
+    color: #0c5460; /* Dark blue */
+    border: 1px solid #bee5eb; /* Border color */
+}
+/* Optional CSS for link styling */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%; /* Adjust width on smaller screens */
+    }
+}

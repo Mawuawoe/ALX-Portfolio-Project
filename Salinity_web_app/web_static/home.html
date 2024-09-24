@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Eclectrochem</h1>
+    </header>
+
+    <!-- Login Form -->
+    <section id="login-section">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message" style="color: red;"></p>
+    </section>
+
+    <!-- Navigation Links (only show after login) -->
+    <nav id="nav-links" style="display:none;">
+        <h2>Navigate</h2>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="data_entry.html">Data Entry</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </nav>
+
+    <script>
+        // Simulate login validation
+        const loginForm = document.getElementById('loginForm');
+        const navLinks = document.getElementById('nav-links');
+        const errorMessage = document.getElementById('error-message');
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Dummy validation (replace with actual logic)
+            if (username === 'admin' && password === 'password') {
+                errorMessage.textContent = '';  // Clear any error messages
+                navLinks.style.display = 'block'; // Show navigation links
+                loginForm.style.display = 'none'; // Hide login form
+            } else {
+                errorMessage.textContent = 'Invalid login credentials. Try again.';
+            }
+        });
+    </script>
+</body>
+</html>

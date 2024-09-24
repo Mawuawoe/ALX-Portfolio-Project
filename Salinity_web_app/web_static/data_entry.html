@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Collect Salinity Data</title>
+	<!-- Link to External CSS -->
+	<link rel="stylesheet" href="/styles/data_entry.css">
+</head>
+<body>
+	<div class="form-container">
+		<h1>Collect Salinity Data</h1>
+		<form id="salinityForm">
+			<!-- Select Pan Type (Pan, Reservoir, PCR) -->
+			<label for="pan_type">Pan Type:</label>
+			<select id="pan_type" name="pan_type" required>
+				<option value="pan">Pan</option>
+				<option value="reservoir">Reservoir</option>
+				<option value="pcr">PCR</option>
+			</select>
+
+			<!-- Select Specific Pan based on Pan Type -->
+			<label for="pan">Select Pan:</label>
+			<select id="pan" name="pan" required>
+					<!-- Options will be populated dynamically -->
+			</select>
+			
+			<!-- Input Salinity Level -->
+			<label for="salinity">Salinity Level (Be):</label>
+			<input type="number" id="salinity" name="salinity" step="1" required>
+
+			<!-- Input Brine Level -->
+			<label for="brine">Brine Level (cm):</label>
+			<input type="number" id="brine" name="salinity" step="1" required>
+
+			<!-- Submit Button -->
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+
+	<!-- Link to External jQuery Script -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- Link to Custom Script -->
+	<script src="scripts/data_entry.js"></script>
+</body>
+</html>
