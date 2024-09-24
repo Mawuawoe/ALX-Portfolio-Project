@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+Web Application using Flask for Managing Salinity Data
+Author:
+    Your Name (Desmond Dzakago)
+"""
+
+
 from flask import Flask, Response, render_template, request, redirect, url_for, flash
 import sys
 sys.path.append("../")
@@ -12,27 +19,34 @@ from datetime import date, datetime
 import pandas as pd
 from io import StringIO
 
-app = Flask(__name__)
-app.secret_key = os.urandom(24)
 
-# Flask-Login setup
+app = Flask(__name__)
+app.secret_key = os.urandom(24) # secret key for session management
+
+# # Flask-Login setup for session management
 login_manager = LoginManager()
 login_manager.init_app(app)
+# Redirect users to login page if not authenticated
 login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Load user from the database by user ID (used by Flask-Login)."""
     return storage.get_by_id(User, user_id)
 
 # Define a UserMixin class to bridge with SQLAlchemy user model
 class AuthUser(UserMixin):
+    """Wrapper for the User class to be compatible with Flask-Login."""
     def __init__(self, user):
-        self.id = str(user.id)
+        self.id = str(user.id) # Flask-Login requires user IDs as strings
         self.username = user.username
         self.email = user.email
 
 #function to retrive pan.id by the pan_id submited
 def get_id_of_pan(pan_id):
+    """
+    Retrieve the internal ID of a pan by its pan identifier
+    """
     pan_objs = storage.all(Pan).values()
     for pan in pan_objs:
         if pan_id == pan.pan_id:
@@ -40,7 +54,7 @@ def get_id_of_pan(pan_id):
 
 def generate_pan_ids():
     """
-    Generate a list of today's pan IDs.
+    Generate a list of pan IDs.
     """
     # Initialize an empty list
     t_pan_ids = []
@@ -74,10 +88,16 @@ def generate_filter_pan_ids(selected_filter):
 
 @app.route('/')
 def index():
+    """Redirects to the login page."""
     return redirect(url_for('login'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Login route to authenticate users. Displays login form on GET and 
+    handles authentication on POST.
+    """
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -100,29 +120,26 @@ def login():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    admin_email = 'desmonddzakago@gmail.com'
-
-    # Get filter from query parameters (from the dropdown selection)
-    selected_filter = request.args.get('filter', '')
-
-    # Get date from query parameters; default to today's date
-    selected_date = request.args.get('date', date.today().isoformat())
+    """
+    Displays the dashboard with salinity data based on filter and date.
+    """
+    admin_email = 'desmonddzakago@gmail.com' # Admin email for special permissions
+    selected_filter = request.args.get('filter', '') # Filter type (pan, reservoir, PCR)
+    selected_date = request.args.get('date', date.today().isoformat()) # Selected date
     date_obj = datetime.strptime(selected_date, '%Y-%m-%d').date()
 
-    #today pan ids
+    # Generate pan IDs and retrieve salinity data
     t_pan_ids = generate_pan_ids()
 
     today_salinity = storage.get_all_by_date(Salinity, date_obj)
 
-    #today salinities
+    # Organize salinity records
     today_records_dict = {}
     for t_pan_id in t_pan_ids:
         # Filter records by pan/reservoir/PCR
         today_salinity_by_pan = storage.get_all_salinity_by_pan(today_salinity, 'pan_id', t_pan_id)
-
         # Get the latest entry for the current pan/reservoir/PCR
         today_latest_entry = storage.get_latest_record(today_salinity_by_pan)
-
         if today_latest_entry:
             # Store the full instance if there's valid data
             today_records_dict[t_pan_id] = today_latest_entry
@@ -133,23 +150,17 @@ def dashboard():
                 "brine_level": "NA"
             }
 
-    #Initialize an empty list
     pan_ids = generate_filter_pan_ids(selected_filter)
-
-
     #fetch all salinity records from today
     salinity_records_today = storage.get_all_by_date(Salinity, date_obj)
     
     # Dictionary to store the latest records for each pan
     latest_records_dict = {}
-
     for pan_id in pan_ids:
         # Filter records by pan/reservoir/PCR
         salinities_for_current_pan = storage.get_all_salinity_by_pan(salinity_records_today, 'pan_id', pan_id)
-
         # Get the latest entry for the current pan/reservoir/PCR
         latest_entry = storage.get_latest_record(salinities_for_current_pan)
-
         if latest_entry:
             # Store the full instance if there's valid data
             latest_records_dict[pan_id] = latest_entry
@@ -172,24 +183,25 @@ def dashboard():
 @login_required
 def report_page():
     """
+    Renders the report page, allowing users to filter salinity records by date and type.
+    
+    - On GET: Displays an empty form for selecting a date and filter type.
+    - On POST: Filters salinity records based on the selected date and filter type, 
+      and renders the results in the template.
     """
     selected_date = request.args.get('date')
     selected_filter = request.args.get('filterType')
     if request.method == 'POST':
-
         selected_date = request.form.get('date', date.today().isoformat())
         date_obj = datetime.strptime(selected_date, '%Y-%m-%d').date()
-
-        # Get filter from query parameters (from the dropdown selection)
         selected_filter = request.form.get('filterType', '')
 
-        #Initialize an empty list
         pan_ids = generate_filter_pan_ids(selected_filter)
 
         #fetch all salinity records from today
         salinity_records_by_date = storage.get_all_by_date(Salinity, date_obj)
         
-        # Dictionary to store the latest records for each pan
+        # Dictionary to store records for each pan
         salinity_records = {}
 
         for pan_id in pan_ids:
@@ -215,13 +227,18 @@ def report_page():
 
 @app.route('/create_admin', methods=['GET', 'POST'])
 def create_admin():
+    """
+    Handles the creation of an admin user in the application.
+    
+    - On GET: Displays the admin creation form.
+    - On POST: Validates the form inputs and creates an admin user if the environment is set to 'dev' 
+      and the provided email is not already registered.
+    """
     if request.method == 'POST':
         if os.getenv('FLASK_ENV') != 'dev':
             flash('Access denied.', 'danger')
             return redirect(url_for('login'))
-        
-        # let's create our first user: admin
-        #admin user
+
         admin_email = 'desmonddzakago@gmail.com'
         firstname = request.form['firstname']
         lastname = request.form['lastname']
@@ -257,7 +274,12 @@ def create_admin():
 @app.route('/create_user', methods=['GET', 'POST'])
 @login_required
 def create_user():
-
+    """
+    Handles the creation of a new user in the application, accessible only to the admin user.
+    - On GET: Displays the user creation form.
+    - On POST: Validates form inputs and creates a new user if the current user is an admin and the provided 
+      email is not already registered.
+    """
     admin_email = 'desmonddzakago@gmail.com'
     if current_user.email != admin_email:
         flash('Access denied. Only admin can create new users.', 'danger')
@@ -276,13 +298,14 @@ def create_user():
             flash('Email already registered', 'danger')
             return redirect(url_for('register'))
         
-        # Create a admin user
+        # Creates a user
         new_user = User(email=email,
                            first_name=firstname,
                            last_name=lastname,
                            username=username,
                            contact_info=contact
-                           )  # Hash the password before storing it
+                           )
+        # Hash the password before storing it
         new_user.set_password(password)
 
         # Save to the database
@@ -294,19 +317,23 @@ def create_user():
     flash('Only admin can create new users.', 'info')
     return render_template('register.html')
 
-#route to recieve & process form
+
 @app.route('/data_entry', methods=['GET', 'POST'])
 @login_required
 def data_entry():
+    """
+    Handles the data entry page for users.
+    - On GET: Displays the data entry form for users to input relevant data.
+    """
     if request.method == 'GET':
         return render_template('data_entry.html')
     
 
-# Route for adding new data
 @app.route('/add_record', methods=['POST'])
 @login_required
 def add_record():
     """
+    Handles the submission of new salinity and brine level records.
     """
     #get data from form
     salinity_level =int(request.form['salinity'])
@@ -331,11 +358,13 @@ def add_record():
     # Redirect to the data entry page or dashboard
     return redirect(url_for('data_entry'))
 
+
 @app.route('/update_record', methods=['POST'])
 @login_required
 def update_record():
     """
-    Update existing salinity record for a specific pan, or create a new one if none exists.
+    Update the latest existing salinity record for a specific pan,
+    or create a new one if none exists.
     """
     # Get data from form
     salinity_level = int(request.form['salinity'])
@@ -386,6 +415,7 @@ def update_record():
 @login_required
 def handle_selection():
     """
+     Handles user selection actions for updating or deleting salinity records.
     """
     action = request.form.get('action')
     selected_pan_ids = request.form.getlist('selected_pan_ids')
@@ -401,7 +431,6 @@ def handle_selection():
             if record:
                 print(record)
                 storage.delete(record)
-
     return redirect(url_for('report_page', date=selected_date, filterType=selected_filter ))
 
 
@@ -409,6 +438,7 @@ def handle_selection():
 @login_required
 def update(pan_id):
     """
+    Updates the salinity and brine level of a specific pan record.
     """
     record = storage.get_by_id(Salinity, pan_id)
     if request.method == "GET":
@@ -423,7 +453,6 @@ def update(pan_id):
         new_brine = int(request.form["brine"])
         setattr(record, 'brine_level', new_brine)
             
-    
         #save changes
         record.save()
 
@@ -434,6 +463,9 @@ def update(pan_id):
 @app.route('/logout')
 @login_required
 def logout():
+    """
+    Logs the current user out of the application.
+    """
     logout_user()  # This function logs the user out
     flash('You have been logged out.', 'info')
     return redirect(url_for('login'))  # Redirect to the login page
@@ -442,6 +474,9 @@ def logout():
 @app.route('/download_csv', methods=['POST'])
 @login_required
 def download_csv():
+    """
+    Generates and downloads a CSV file of salinity records filtered by date and pan type
+    """
 
     # Get the selected date and filter from the form
     selected_date = request.form.get('selected_date')
@@ -509,6 +544,9 @@ def download_csv():
 
 @app.teardown_appcontext
 def teardown_db(exception):
+    """
+    Closes the current database session after each request.
+    """
     storage.close()
 
 
