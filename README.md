@@ -26,7 +26,7 @@ The Salinity App is a specialized web application designed to streamline and aut
     ```
 
 ## Usage
-To start the project,
+To start,
 after installing the requirement, setup your database
 run:
 ```bash
