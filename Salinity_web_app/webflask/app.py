@@ -89,7 +89,7 @@ def generate_filter_pan_ids(selected_filter):
 @app.route('/')
 def index():
     """Redirects to the login page."""
-    return redirect(url_for('login'))
+    return render_template('landing_page.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
