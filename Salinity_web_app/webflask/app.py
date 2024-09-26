@@ -22,7 +22,7 @@ from io import StringIO
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24) # secret key for session management
-app.config['SESSION_COOKIE_SECURE'] = False
+app.config['SESSION_COOKIE_SECURE'] = True
 
 
 # # Flask-Login setup for session management
