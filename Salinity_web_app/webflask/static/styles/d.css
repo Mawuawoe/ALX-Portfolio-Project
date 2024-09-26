@@ -91,22 +91,21 @@ header h1 {
     left: 85%;
     transform: translate(-50%, -50%);
 }
-#Be {
+
+#Be, #cm {
     border: solid 2px;
     padding: 5px;
     color: white;
-    background-color: red;
     border-radius: 7px;
     font-size: 1vw;
 }
 
+#Be {
+    background-color: red;
+}
+
 #cm {
-    border: solid 2px;
-    padding: 5px;
-    color: white;
     background-color: blue;
-    border-radius: 7px;
-    font-size: 1vw;
 }
 
 
@@ -134,35 +133,17 @@ header h1 {
     font-size: 1vw;
 }
 
-#Pan1{
-    top: 56%;
-    left: 84%; 
-}
+#Pan1{ top: 56%; left: 84%; } 
 
-#Pan2{
-    top: 40%;
-    left: 87.5%; 
-}
+#Pan2{ top: 40%; left: 87.5%; }
 
-#Pan3{
-    top: 25%;
-    left: 90.5%; 
-}
+#Pan3{ top: 25%; left: 90.5%; }
 
-#Pan4{
-    top: 11%;
-    left: 92.5%; 
-}
+#Pan4{ top: 11%; left: 92.5%; }
 
-#Pan5{
-    top: 11%;
-    left: 83.5%; 
-}
+#Pan5{ top: 11%; left: 83.5%; }
 
-#Pan6{
-    top: 26%;
-    left: 81%; 
-}
+#Pan6{ top: 26%; left: 81%; }
 
 #Pan7{
     top: 41%;
@@ -370,14 +351,60 @@ form select:hover {
     border-color: #eb32a7;
 }
 
-/* Style for the entire form on small screens */
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+    .map-container {
+        width: 100%; /* Adjust to fit the screen */
+    }
+
+    #Be, #cm, .salinity, .brine-level {
+        font-size: 2.5vw; /* Adjust font sizes for smaller screens */
+    }
+}
+
 @media (max-width: 600px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
+
     form {
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     form label {
         margin-bottom: 5px;
+    }
+
+    #Be, #cm, .salinity, .brine-level {
+        font-size: 3vw; /* Further adjust for very small screens */
+    }
+
+    .map-container {
+        padding: 5px;
+        width: 100%;
     }
 }
