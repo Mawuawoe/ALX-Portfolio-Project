@@ -18,11 +18,13 @@ import os
 from datetime import date, datetime
 import pandas as pd
 from io import StringIO
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24) # secret key for session management
 app.config['SESSION_COOKIE_SECURE'] = True
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 
 # # Flask-Login setup for session management
