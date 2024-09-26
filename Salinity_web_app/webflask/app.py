@@ -103,6 +103,8 @@ def login():
         email = request.form['email']
         password = request.form['password']
 
+        print(f"Email: {email}, Password: {password}")  # Debugging line
+
         # Fetch the user from the database
         user = storage.get_first_by(User, email=email)
 
