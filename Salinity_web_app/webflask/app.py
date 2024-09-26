@@ -21,7 +21,8 @@ from io import StringIO
 
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24) # secret key for session management
+app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'default_secret_key') # secret key for session management
+app.config['SESSION_COOKIE_SECURE'] = True  # or False for HTTP
 
 
 # # Flask-Login setup for session management
@@ -106,8 +107,11 @@ def login():
         print(f"Email: {email}, Password: {password}")  # Debugging line
 
         # Fetch the user from the database
-        user = storage.get_first_by(User, email=email)
-
+        try:
+            user = storage.get_first_by(User, email=email)
+        except Exception as e:
+            flash('An error occurred while processing your request.', 'danger')
+            return render_template('login.html')
         # Check if user exists and if the password is correct
         if user and user.check_password(password):
             auth_user = AuthUser(user)
